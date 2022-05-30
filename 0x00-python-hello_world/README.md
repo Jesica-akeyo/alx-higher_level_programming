@@ -13,3 +13,7 @@ followed by a new line
 5-print_string.py - Complete this source code in order to print 3 times a string stored in the variable str, followed by its first 9 characters.
 
 6-concat.py - Complete this source code to print Welcome to Holberton School!.You have to use the variables str1 and str2 in your new line of code.
+
+7-edges.py - Complete the source code such that word_first_3 should contain the first 3 letters of the variable word, word_last_2 should contain the last 2 letters of the variable word, middle_word should contain the value of the variable word without the first and last letters.
+
+
