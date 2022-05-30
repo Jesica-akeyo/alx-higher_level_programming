@@ -22,3 +22,5 @@ eck_cycle.cfollowed by a new line
 
 10-check_cycle.c - Write a function in C that checks if a singly linked list has a cycle in it.Prototype: int check_cycle(listint_t *list).Return: 0 if there is no cycle, 1 if there is a cycle
 
+100-write.py - Write a Python script that prints exactly and that piece of art is useful - Dora Korpar, 2015-10-19, followed by a new line.Use the function write from the sys module.Your script should print stderr and exit with the status code 1.
+
