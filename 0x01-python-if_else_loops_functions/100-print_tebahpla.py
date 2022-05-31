@@ -2,5 +2,5 @@
 for i in range(122, 96, -1):
     c = i
     if i % 2 != 0:
-        c = i -32
+        c = i - 32
     print('{:c}'.format(c), end="")
