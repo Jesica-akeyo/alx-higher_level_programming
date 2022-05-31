@@ -3,3 +3,7 @@
 1-last_digit.py - This program will assign a random signed number to the variable number each time it is executed. Complete the source code in order to print the last digit of the number stored in the variable number.
 
 2-print_alphabet.py -  a program that prints the ASCII alphabet, in lowercase, not followed by a new line.
+
+3-print_alphabt.py - a program that prints the ASCII alphabet, in lowercase, not followed by a new line.Print all the letters except q and e.
+
+
