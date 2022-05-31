@@ -9,3 +9,5 @@
 4-print_hexa.py -  a program that prints all numbers from 0 to 98 in decimal and in hexadecimal (as in the following example)
 
 5-print_comb2.py - a program that prints numbers from 0 to 99.Numbers must be separated by ,, followed by a space.Numbers should be printed in ascending order, with two digits.
+
+6-print_comb3.py - a program that prints all possible different combinations of two digits.
