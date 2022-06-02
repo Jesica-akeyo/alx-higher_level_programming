@@ -1,6 +1,7 @@
-#0x02. Python - import & modules**
+# 0x02. Python - import & modules
 
-##About
+## About
+
 An introductory project on:
 
 How to import functions from another file
@@ -15,15 +16,15 @@ How to prevent code in your script from being executed when imported
 
 How to use command line arguments with your Python programs
 
-###Requirements
+### Requirements
 
 Python 3.4
 
 pep8 1.7
 
-**#File Descriptions**
+*# File Descriptions*
 
-**##Mandatory**
+## Mandatory
 
 ***0-add.py*** - imports the function def add(a, b): from the file add_0.py and prints the result of the addition 1 + 2 = 3
 
