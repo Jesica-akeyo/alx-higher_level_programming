@@ -1,33 +1,53 @@
 #include "lists.h"
+#include <stdio.h>
 
 /**
- * is_palindrome - checks if a singly linked list is a palindrome
- * @head: the head address of the linked list
- * Return: 0 if it is not a palindrome
- * 1 if it is a palindrome
+ * is_palindrome - checks if list is palindrome
+ * @head: linked list
+ *
+ * Return: 0 if not palindrome, 1 otherwise
  */
-
 int is_palindrome(listint_t **head)
 {
-	listint_t *cur = *head;
-	int tab[2048], i = 0, j = 0;
+	listint_t *aux = *head;
+	int length = 0, *array = NULL, i = 0, j = 0;
 
-	if (*head)
+	if (!head || !*head)
+		return (1);
+	length = listint_len(*head);
+	array = malloc(sizeof(int) * length);
+	if (!array)
+		return (-1);
+	while (i < length)
 	{
-		while (cur)
+		array[i] = aux->n;
+		aux = aux->next;
+		i++;
+	}
+	j = length - 1;
+	for (i = 0; i < (length - 1) / 2; i++; j--)
+	{
+		if (array[i] != array[j])
 		{
-			tab[i] = cur->n;
-			cur = cur->next;
-			i++;
-		}
-
-		while (j < i / 2)
-		{
-			if (tab[j] == tab[i - j - 1])
-				j++;
-			else
-				return (0);
+			free(array);
+			return (0);
 		}
 	}
+	free(array);
 	return (1);
+}
+
+/**
+ * listint_len -  function that returns the number of elements in a linked list
+ * @h: list
+ *
+ * Return: number of nodes
+ */
+size_t listint_len(const listint_t *h)
+{
+	int i = 0;
+
+	for (i = 0; h != NULL; i++)
+		h = h->next;
+	return (i);
 }
