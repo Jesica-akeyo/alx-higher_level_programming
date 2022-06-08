@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 def weight_average(my_list=[]):
-    if len(my_list) == 0:
-        return 0
-    weight = 0
-    n = 0
-    for elem in my_list:
-        n+= elem[0] * elem[1]
-        weight += elem[1]
-    return n / weight
+    if my_list:
+        return sum(a * b for a, b in my_list) / sum(b for a, b in my_list)
+    return 0
+    # = ((1 * 2) + (2 * 1) + (3 * 10) + (4 * 2)) / (2 + 1 + 10 + 2)
