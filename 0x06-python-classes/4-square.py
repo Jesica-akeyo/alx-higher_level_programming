@@ -10,6 +10,7 @@ class Square:
         size must be an integer and must be greater than 0
         """
         self.__size = size
+
     @property
     def size(self):
         """
