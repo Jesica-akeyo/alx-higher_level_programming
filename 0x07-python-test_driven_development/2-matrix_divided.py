@@ -29,7 +29,7 @@ def matrix_divided(matrix, div):
         raise TypeError(msg_type)
 
     len_e = 0
-    msg_size = "Eache row of the matrix must have the same size"
+    msg_size = "Each row of the matrix must have the same size"
 
     for elem in matrix:
         if not elem or not isinstance(elem, list):
