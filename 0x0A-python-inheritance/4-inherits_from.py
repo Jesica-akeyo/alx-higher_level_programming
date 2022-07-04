@@ -6,7 +6,7 @@ This module contains the function: inherits_from
 
 def inherits_from(obj, a_class):
     """
-    returns True if obj is an instance of aclass that 
+    returns True if obj is an instance of aclass that
     inherited (directly/indirectly) from a_class
     otherwise False
     """
