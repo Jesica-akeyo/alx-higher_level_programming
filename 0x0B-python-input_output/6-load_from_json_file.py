@@ -10,5 +10,5 @@ def load_from_json_file(filename):
     Function that creates an obj from a JSON file
     filename: file name
     """
-   with open(filename, 'r', encoding="utf-8") as f:
-       return json.loads(f)
+    with open(filename, 'r', encoding="utf-8") as f:
+        return json.loads(f)
