@@ -3,15 +3,19 @@
 save them to a file
 """
 import sys
-save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+import json
+
+load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
+save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
+
+filename = "add_item.json"
+with open(filename, 'a+') as f:
+    pass
+
 try:
-    obj = load_from_json_file("add_item.json")
-except:
-    save_to_json_file([], "add_item.json")
-obj = load_from_json_file("add_item.json")
-l = []
-for i in range(1, len(sys.argv)):
-    l.append(sys.argv[i])
-obj = obj + 1
-save_to_json_file(obj, "add_item.json")
+    my_list = load_from_json_file(filename)
+except ValueError:
+    my_list = []
+list1 = sys.argv[1:]
+my_list += list1
+save_to_json_file(my_list, filename)
