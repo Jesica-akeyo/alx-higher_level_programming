@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """
-This module contains one function
+This module creates an Obj from a JSON file
 """
 import json
 
 
-def from_json_string(my_str):
+def load_from_json_file(filename):
     """
-    returns an object (Python data structure)
-    represented by a JSON string
+    Function that creates an obj from a JSON file
+    filename: file name
     """
-    return json.loads(my_str)
+   with open(filename, 'r', encoding="utf-8") as f:
+       return json.loads(f)

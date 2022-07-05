@@ -1,12 +1,12 @@
 #!/usr/bin/python3
+""" Module that returns the dictionary description with a simple
+data structure for a JSON serialization of an object
 """
-This module contains one function
-"""
-import json
 
 
-def load_from_json_file(filename):
-    """ creates an Object from a “JSON file” """
-    with open(filename, 'r') as f:
-        data = f.read()
-        return json.loads(data)
+def class_to_json(obj):
+    """ Function that retuns the dictionary description of an obj """
+    res = {}
+    if hasattr(obj, "__dict__"):
+        res = obj.__dict__.copy()
+    return res
