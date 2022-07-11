@@ -1,243 +1,99 @@
-
-
 #!/usr/bin/python3
 """
-Unittests for Square class
+Unittest for Square class
 """
-
-import io
 import unittest
-import sys
-from models.base import Base
 from models.square import Square
 
 
-class Test_Square(unittest.TestCase):
-    """ validate test for Square """
+class testclass(unittest.TestCase):
+    """
+    This class contains unittests for Square class
+    """
+    def test_instantiation(self):
+        """
+        method that holds the tests related to __init__ method
+        """
+        s1 = Square(5)
+        self.assertEqual(s1.size, 5)
+        self.assertEqual(s1.height, 5)
+        self.assertEqual(s1.x, 0)
+        self.assertEqual(s1.y, 0)
+        s2 = Square(5, 5, 5, None)
+        self.assertNotEqual(s2.id, None)
 
-    def test_Square1(self):
-        """
-        Validate the number of id
-        """
-        S1 = Square(5)
-        self.assertEqual(S1.id, 11)
-        S2 = Square(5, 2, 1, 48)
-        self.assertEqual(S2.id, 48)
+    def test_private_attributes(self):
+        """ checks if attributes are private """
+        s1 = Square(5)
+        with self.assertRaises(AttributeError):
+            print(s1.__width)
+        with self.assertRaises(AttributeError):
+            print(s1.__height)
+        with self.assertRaises(AttributeError):
+            print(s1.__x)
+        with self.assertRaises(AttributeError):
+            print(s1.__y)
 
-    def test_Square2(self):
-        """
-        Validate id with other types
-        """
-        S3 = Square(10, 2, 0, "hi")
-        self.assertEqual(S3.id, "hi")
-        S4 = Square(10, 2, 0, [12, 10])
-        self.assertEqual(S4.id, [12, 10])
-        S5 = Square(10, 2, 0, {"key": 12, "value": 20})
-        self.assertEqual(S5.id, {'key': 12, 'value': 20})
-        S6 = Square(10, 2, 0, (12, 10))
-        self.assertEqual(S6.id, (12, 10))
+    def test_wrong_arguments_number(self):
+        """ checks number of arguments """
+        with self.assertRaises(TypeError):
+            s3 = Square()
+        with self.assertRaises(TypeError):
+            s3 = Square(5, 5, 5, 5, 5, 5, 5, 5, 5)
 
-    def test_Square3(self):
+    def test_validation(self):
         """
-        test Square without arguments
-        """
-        with self.assertRaises(TypeError):
-            S7 = Square()
-
-    def test_Square4(self):
-        """
-        test differents parameters
-        """
-        S8 = Square(24)
-        self.assertEqual(S8.size, 24)
-        self.assertEqual(S8.x, 0)
-        self.assertEqual(S8.y, 0)
-
-    def test_Square5(self):
-        """
-        test differents parameters1
-        """
-        S9 = Square(4, 2, 3)
-        self.assertEqual(S9.size, 4)
-        self.assertEqual(S9.x, 2)
-        self.assertEqual(S9.y, 3)
-
-    def test_Square6(self):
-        """
-        the numbers of arguments is five
+        method to test validation of width, height, x and y
         """
         with self.assertRaises(TypeError):
-            S10 = Square(10, 5, 3, 1, 3)
-
-    def test_Square7(self):
-        """
-        validate the type of arguments size
-        """
+            s3 = Square("h", "j")
         with self.assertRaises(TypeError):
-            S11 = Square("Holberton")
+            s3 = Square(5, "j")
         with self.assertRaises(TypeError):
-            S13 = Square((4, 8))
+            s3 = Square(1, 2, "a")
         with self.assertRaises(TypeError):
-            S14 = Square([2, 5])
-        with self.assertRaises(TypeError):
-            S15 = Square({"KEY": 10})
-
-    def test_Square8(self):
-        """
-        validate the type of arguments x and y
-        """
-        with self.assertRaises(TypeError):
-            S16 = Square(4, 8, "Holbie")
-        with self.assertRaises(TypeError):
-            S17 = Square(4, 8, [10, 4])
-        with self.assertRaises(TypeError):
-            S18 = Square(4, 8, (12, 20))
-        with self.assertRaises(TypeError):
-            S19 = Square(4, {10: 2}, 8)
-
-    def test_Square9(self):
-        """
-        Validate the size of width
-        """
+            s3 = Square(1, 3, "j", 5)
         with self.assertRaises(ValueError):
-            Square(-2)
-
-    def test_Square10(self):
-        """
-        validate the position of x and y
-        """
+            s3 = Square(0, 5)
         with self.assertRaises(ValueError):
-            Square(5, -1, 3)
+            s3 = Square(-1, 5)
         with self.assertRaises(ValueError):
-            Square(5, 1, -3)
-
-    def test_Square11(self):
-        """
-        Test the area of Square
-        """
-        S20 = Square(2)
-        self.assertEqual(S20.area(), 4)
-        S21 = Square(4, 2, 1, 6)
-        self.assertEqual(S21.area(), 16)
-
-    def test_Square12(self):
-        """
-        Test str of Square
-        """
-        S22 = Square(6, 3, 1, 8)
-        self.assertEqual(S22.__str__(), "[Square] (8) 3/1 - 6")
-
-    def test_Square13(self):
-        """
-        Test update of Square TEST: ID
-        """
-        S23 = Square(4, 8, 1, 10)
-        self.assertEqual(S23.__str__(), "[Square] (10) 8/1 - 4")
-        S23.update(24)
-        self.assertEqual(S23.__str__(), "[Square] (24) 8/1 - 4")
-
-    def test_Square14(self):
-        """
-        Test update of Square TEST:SIZE
-        """
-        S24 = Square(4, 8, 1, 10)
-        self.assertEqual(S24.__str__(), "[Square] (10) 8/1 - 4")
-        S24.update(24, 5)
-        self.assertEqual(S24.__str__(), "[Square] (24) 8/1 - 5")
-
-    def test_Square15(self):
-        """
-        Test update of Square TEST:X
-        """
-        S25 = Square(4, 8, 1, 10)
-        self.assertEqual(S25.__str__(), "[Square] (10) 8/1 - 4")
-        S25.update(24, 5, 7)
-        self.assertEqual(S25.__str__(), "[Square] (24) 7/1 - 5")
-
-    def test_Square16(self):
-        """
-        Test update of Square TEST:Y
-        """
-        S26 = Square(4, 8, 1, 10)
-        self.assertEqual(S26.__str__(), "[Square] (10) 8/1 - 4")
-        S26.update(24, 5, 7, 0)
-        self.assertEqual(S26.__str__(), "[Square] (24) 7/0 - 5")
-
-    def test_Square17(self):
-        """
-        Test update with invalid value
-        """
-        S27 = Square(8, 4, 3, 2)
-        self.assertEqual(S27.__str__(), "[Square] (2) 4/3 - 8")
+            s3 = Square(5, -2)
         with self.assertRaises(ValueError):
-            S27.update(24, -5)
+            s3 = Square(5, -5)
+        with self.assertRaises(ValueError):
+            r3 = Square(5, 5, -1, 7)
 
-    def test_Square18(self):
-        """
-        Test update with type str in id
-        """
-        S28 = Square(8, 4, 3, 2)
-        self.assertEqual(S28.__str__(), "[Square] (2) 4/3 - 8")
-        S28.update("Holberton", 3)
-        self.assertEqual(S28.__str__(), "[Square] (Holberton) 4/3 - 3")
+    def test_area(self):
+        """ test area method """
+        s3 = Square(5)
+        self.assertEqual(s3.area(), 25)
 
-    def test_Square19(self):
-        """
-        Test update with type str in id
-        """
-        S29 = Square(8, 4, 3, 2)
-        self.assertEqual(S29.__str__(), "[Square] (2) 4/3 - 8")
-        with self.assertRaises(TypeError):
-            S29.update(10, "holberton")
+    def test_str(self):
+        """ test str method """
+        s3 = Square(4, 2, 1, 12)
+        s4 = Square(4)
+        st = str(s3)
+        st2 = str(s4)
+        self.assertEqual(st, "[Square] (12) 2/1 - 4")
+        self.assertEqual(st2, "[Square] (21) 0/0 - 4")
 
-    def test_Square20(self):
-        """
-        test display rectangle
-        """
-        S30 = Square(2)
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-        S30.display()
-        output = captured_output.getvalue()
-        sys.stdout = sys.__stdout__
-        self.assertEqual(output, '##\n##\n')
+    def test_update(self):
+        """ test update method """
+        s3 = Square(5, 5, 5, 5)
+        s3.update(1)
+        st = str(s3)
+        self.assertEqual(st, "[Square] (1) 5/5 - 5")
+        s3.update(1, 1, 1, 1, 1)
+        st2 = str(s3)
+        self.assertEqual(st2, "[Square] (1) 1/1 - 1")
 
-    def test_Square21(self):
-        """
-        test display #1
-        """
-        S31 = Square(2, 3, 2)
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-        S31.display()
-        output = captured_output.getvalue()
-        sys.stdout = sys.__stdout__
-        self.assertEqual(output, '\n' * 2 + (' ' * 3 + '#' * 2 + '\n') * 2)
-
-    def test_Square22(self):
-        """
-        Test update of rectangle with **kwargs
-        """
-        S32 = Square(4, 8, 1, 10)
-        self.assertEqual(S32.__str__(), "[Square] (10) 8/1 - 4")
-        S32.update(size=1)
-        self.assertEqual(S32.__str__(), "[Square] (10) 8/1 - 1")
-        S32.update(size=2, x=2)
-        self.assertEqual(S32.__str__(), "[Square] (10) 2/1 - 2")
-        S32.update(y=1, size=2, x=3, id=89)
-        self.assertEqual(S32.__str__(), "[Square] (89) 3/1 - 2")
-        S32.update(x=1, size=2, y=2)
-        self.assertEqual(S32.__str__(), "[Square] (89) 1/2 - 2")
-
-    def test_Square23(self):
-        """
-        Test Rectangle Return a Dictionary
-        """
-        S33 = Square(10, 2, 1, 11)
-        self.assertEqual(S33.__str__(), "[Square] (11) 2/1 - 10")
-        S33_dictionary = S33.to_dictionary()
-        dicts = {'id': 11, 'x': 2, 'size': 10, 'y': 1}
-        self.assertEqual(S33.to_dictionary(), dicts)
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_updatek(self):
+        """ test update method (*args and **kwargs) """
+        s3 = Square(5, 5, 5, 5)
+        s3.update(1, size=1)
+        st = str(s3)
+        self.assertEqual(st, "[Square] (1) 5/5 - 5")
+        s3.update(size=1, x=1, y=1, id=1)
+        st = str(s3)
+        self.assertEqual(st, "[Square] (1) 1/1 - 1")
