@@ -32,12 +32,12 @@ class Base:
     @classmethod
     def save_to_file(cls, list_objs):
         """writes the JSON string representation of list_objs to a file"""
-        l = []
+        list_dic = []
         if list_objs is not None:
             for i in list_objs:
-                l.append(i.to_dictionary())
+                list_dic.append(i.to_dictionary())
         with open(cls.__name__ + ".json", "w") as f:
-            f.write(cls.to_json_string(l))
+            f.write(cls.to_json_string(list_dic))
 
     @staticmethod
     def from_json_string(json_string):
@@ -67,12 +67,10 @@ class Base:
         try:
             with open(cls.__name__ + ".json", "r") as f:
                 ls = cls.from_json_string(f.read())
-                l = []
+                list_ins = []
                 for i in ls:
-                    l.append(cls.create(**i))
-                return l
-        except:
-            return []
+                    list_ins.append(cls.create(**i))
+                return list_ins
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
@@ -103,7 +101,7 @@ class Base:
         try:
             with open(cls.__name__ + ".csv", "r") as f:
                 rs = csv.reader(f, delimiter=',')
-                l = []
+                list_ins = []
                 if cls.__name__ == "Rectangle":
                     for i in rs:
                         r = cls(
@@ -113,12 +111,10 @@ class Base:
                                 int(i[4]),
                                 int(i[0])
                                 )
-                        l.append(r)
-                    return l
+                        list_ins.append(r)
+                    return list_ins
                 elif cls.__name__ == "Square":
                     for i in rs:
                         r = cls(int(i[1]), int(i[2]), int(i[3]), int(i[0]))
-                        l.append(r)
-                    return l
-        except:
-            return []
+                        list_ins.append(r)
+                    return list_ins
