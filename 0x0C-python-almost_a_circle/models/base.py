@@ -1,16 +1,16 @@
 #!/usr/bin/python3
-""" contains class Base """
+""" Module that contains class Base """
 import json
 import csv
 import os.path
 
 
 class Base:
-    """ class base """
+    """ Class Base """
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """ instantiation """
+        """ Initializes instances """
         if id is not None:
             self.id = id
         else:
@@ -19,14 +19,14 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """ list to JSON string """
+        """ List to JSON string """
         if list_dictionaries is None or list_dictionaries == "[]":
             return "[]"
         return json.dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
-        """ saveobject in  file """
+        """ Save object in a file """
         filename = "{}.json".format(cls.__name__)
         list_dic = []
 
@@ -50,17 +50,17 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
-        """ create instance """
+        """ Create an instance """
         if cls.__name__ == "Rectangle":
             new = cls(10, 10)
-        new:
+        else:
             new = cls(10)
         new.update(**dictionary)
         return new
 
     @classmethod
     def load_from_file(cls):
-        """ returns a list of instances """
+        """ Returns a list of instances """
         filename = "{}.json".format(cls.__name__)
 
         if os.path.exists(filename) is False:
@@ -79,7 +79,7 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """ method that saves a csv file """
+        """ Method that saves a CSV file """
         filename = "{}.csv".format(cls.__name__)
 
         if cls.__name__ == "Rectangle":
@@ -105,10 +105,10 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
-        """ loads a csv file """
+        """ Method that loads a CSV file """
         filename = "{}.csv".format(cls.__name__)
 
-        if os.path.exists(filename) is false:
+        if os.path.exists(filename) is False:
             return []
 
         with open(filename, 'r') as readFile:
