@@ -1,23 +1,20 @@
 #!/usr/bin/python3
-""" contains class Square that inherits from Rectangle """
+"""
+This module containes the class Square, that inherits from the class Rectangle
+"""
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """ class Rectangle """
-
+    """ a Square is a special Rectangle """
     def __init__(self, size, x=0, y=0, id=None):
         """ instantiation """
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """ special method """
-        str_square = "[square] "
-        str_id = "({})".format(self.id)
-        str_xy = "{}/{} - ".format(self.x, self.y)
-        str_wh = "{}/{}".format(self.width, self.height)
-
-        return str_square + str_id + str_xy + str_wh
+        """ the string representation of an object """
+        return "[Square] ({}) {}/{} - {}"\
+            .format(self.id, self.x, self.y, self.height)
 
     @property
     def size(self):
@@ -30,42 +27,28 @@ class Square(Rectangle):
         self.width = value
         self.height = value
 
-    def __str__(self):
-        """ special method"""
-        str_rectangle = "[Square] "
-        str_id = "({}) ".format(self.id)
-        str_xy = "{}/{} - ".format(self.x, self.y)
-        str_size = "{}".format(self.size)
-
-        return str_rectange + str_id + str_xy + str_size
-
-    def update(slf, *args, **kwargs):
-        """ update method """
-        if args is not None and len(args) is not 0:
-            list_atr = ['id', 'size', 'x', 'y']
-            for i in range(len(args)):
-                if list_atr[i] == 'size':
-                    setattr(self, 'width', args[i])
-                    setattr(self, 'height' args[i])
-                else:
-                    setattr(self, list_atr[i], args[i])
+    def update(self, *args, **kwargs):
+        """ updates the attributes of square """
+        if args != ():
+            if len(args) >= 2:
+                newargs = args[0:2] + args[1:]
+            else:
+                newargs = args
+            super().update(*newargs)
         else:
-            for key, value in kwargs.items():
-                if key == 'size':
-                    setattr(self, 'width', value)
-                    setattr(self, 'height', value)
+            newkwargs = dict()
+            for k, v in kwargs.items():
+                if k == "size":
+                    newkwargs["width"] = v
+                    newkwargs["height"] = v
                 else:
-                    setattr(self, key, value)
+                    newkwargs[k] = v
+            super().update(**newkwargs)
 
     def to_dictionary(self):
-        """ return a dictionary with attributes """
-        list_atr = ['id', 'size', 'x', 'y']
-        dict_res = {}
-
-        for key in list_atr:
-            if key == 'size':
-                dict_res[key] = getattr(self, 'width')
-            else:
-                dict_res[key] = getattr(self, key)
-
-        return dict_res
+        """ returns the dictionary representation of a Square """
+        ds = super().to_dictionary()
+        ds["size"] = ds["height"]
+        del ds["height"]
+        del ds["width"]
+        return ds
