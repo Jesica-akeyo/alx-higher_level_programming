@@ -32,12 +32,12 @@ class Base:
     @classmethod
     def save_to_file(cls, list_objs):
         """writes the JSON string representation of list_objs to a file"""
-        l = []
+        ld = []
         if list_objs is not None:
             for i in list_objs:
-                l.append(i.to_dictionary())
+                ld.append(i.to_dictionary())
         with open(cls.__name__ + ".json", "w") as f:
-            f.write(cls.to_json_string(l))
+            f.write(cls.to_json_string(ld))
 
     @staticmethod
     def from_json_string(json_string):
@@ -67,11 +67,11 @@ class Base:
         try:
             with open(cls.__name__ + ".json", "r") as f:
                 ls = cls.from_json_string(f.read())
-                l = []
+                ls = []
                 for i in ls:
-                    l.append(cls.create(**i))
-                return l
-        except:
+                    ls.append(cls.create(**i))
+                return ls
+        except Exception:
             return []
 
     @classmethod
@@ -103,7 +103,7 @@ class Base:
         try:
             with open(cls.__name__ + ".csv", "r") as f:
                 rs = csv.reader(f, delimiter=',')
-                l = []
+                lm = []
                 if cls.__name__ == "Rectangle":
                     for i in rs:
                         r = cls(
@@ -113,12 +113,12 @@ class Base:
                                 int(i[4]),
                                 int(i[0])
                                 )
-                        l.append(r)
-                    return l
+                        lm.append(r)
+                    return lm
                 elif cls.__name__ == "Square":
                     for i in rs:
                         r = cls(int(i[1]), int(i[2]), int(i[3]), int(i[0]))
-                        l.append(r)
-                    return l
-        except:
+                        lm.append(r)
+                    return lm
+        except Exception:
             return []
