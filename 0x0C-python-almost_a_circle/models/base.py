@@ -32,12 +32,12 @@ class Base:
     @classmethod
     def save_to_file(cls, list_objs):
         """writes the JSON string representation of list_objs to a file"""
-        list_dic = []
+        l = []
         if list_objs is not None:
             for i in list_objs:
-                list_dic.append(i.to_dictionary())
+                l.append(i.to_dictionary())
         with open(cls.__name__ + ".json", "w") as f:
-            f.write(cls.to_json_string(list_dic))
+            f.write(cls.to_json_string(l))
 
     @staticmethod
     def from_json_string(json_string):
@@ -67,10 +67,12 @@ class Base:
         try:
             with open(cls.__name__ + ".json", "r") as f:
                 ls = cls.from_json_string(f.read())
-                list_ins = []
+                l = []
                 for i in ls:
-                    list_ins.append(cls.create(**i))
-                return list_ins
+                    l.append(cls.create(**i))
+                return l
+        except:
+            return []
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
@@ -101,7 +103,7 @@ class Base:
         try:
             with open(cls.__name__ + ".csv", "r") as f:
                 rs = csv.reader(f, delimiter=',')
-                list_ins = []
+                l = []
                 if cls.__name__ == "Rectangle":
                     for i in rs:
                         r = cls(
@@ -111,10 +113,12 @@ class Base:
                                 int(i[4]),
                                 int(i[0])
                                 )
-                        list_ins.append(r)
-                    return list_ins
+                        l.append(r)
+                    return l
                 elif cls.__name__ == "Square":
                     for i in rs:
                         r = cls(int(i[1]), int(i[2]), int(i[3]), int(i[0]))
-                        list_ins.append(r)
-                    return list_ins
+                        l.append(r)
+                    return l
+        except:
+            return []
