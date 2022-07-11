@@ -9,7 +9,7 @@ from models.base import Base
 
 
 class TestRectangleMethods(unittest.TestCase):
-    """ suite to test Rectangle class """
+    """ Suite to test Rectangle class """
 
     def setUp(self):
         """ Method invoked for each test """
@@ -132,8 +132,8 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(new.area(), 10)
         new.height = 5
         self.assertEqual(new.area(), 25)
-        
-        def test_area_3(self):
+
+    def test_area_3(self):
         """ Checking the return value of area method """
         new = Rectangle(3, 8)
         self.assertEqual(new.area(), 24)
@@ -365,5 +365,3 @@ class TestRectangleMethods(unittest.TestCase):
 
         for i in range(len(linput)):
             self.assertEqual(linput[i].__str__(), loutput[i].__str__())
-
-
