@@ -112,4 +112,4 @@ class Rectangle(Base):
         for key in list_atr:
             dict_res[key] = getattr(self, key)
 
-        return 
+        return dict_res
