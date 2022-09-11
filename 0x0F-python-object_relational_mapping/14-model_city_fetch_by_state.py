@@ -20,7 +20,7 @@ if __name__ == "__main__":
                                 )
     session = Session(engine)
     re = session.query(City, State).filter(City.state_id == State.id)\
-            .order_by(City.id).all()
+        .order_by(City.id).all()
     for C, x in re:
         print("{}: ({}) {}".format(x.name, C.id, C.name))
     session.commit()
