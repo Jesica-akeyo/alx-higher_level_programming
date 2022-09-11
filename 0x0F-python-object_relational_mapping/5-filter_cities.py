@@ -23,10 +23,7 @@ def main():
     JOIN states ON cities.state_id = states.id WHERE states.name LIKE %s \
     ORDER BY cities.id", (state_name,))
     row = cur.fetchall()
-    re = ""
-    for r in row:
-        re += r[0] + ", "
-    print(re[0:-2:])
+    print(", ".join(city[0] for city in row))
     cur.close()
     conn.close()
 
