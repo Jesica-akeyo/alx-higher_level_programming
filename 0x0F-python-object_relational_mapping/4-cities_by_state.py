@@ -8,7 +8,7 @@ import MySQLdb
 
 
 def main():
-    conn =  MySQLdb.connect(
+    conn = MySQLdb.connect(
                         host="localhost",
                         port=3306,
                         user=sys.argv[1],
@@ -25,7 +25,6 @@ def main():
         print(r)
     cur.close()
     conn.close()
-
 
 
 if __name__ = "__main__":
